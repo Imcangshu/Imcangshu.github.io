@@ -4,84 +4,153 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>崔凯翔 | 个人主页</title>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" rel="stylesheet">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --card-bg: rgba(255,255,255,0.98);
+  --mask-bg: rgba(0,0,0,0.22);
+  --primary: #214478;
+  --secondary: #547ca8;
+  --accent: #e6eaf0;
+  --text-dark: #222;
+  --text-light: #555;
+  --shadow: 0 8px 32px rgba(33,44,78,0.09);
 }
-html, body {
+body,html {
   width: 100%;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-}
-body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  box-sizing: border-box;
   background-image: url("https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/801ef4138e53d1cab7a88924c3d1d45e.jpg");
-  background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center top;
   background-attachment: fixed;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 60px 20px;
 }
 body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
+  background: var(--mask-bg);
+  z-index: 0;
+  pointer-events: none;
 }
-.card {
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0; right: 0;
+  height: 60px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+}
+.navbar li {
+  font-size: 18px;
+}
+.navbar a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.navbar a:hover, .navbar a.active {
+  color: var(--secondary);
+  background: var(--accent);
+}
+.lang-switch {
+  margin-left: 24px;
+  font-size: 15px;
+}
+.lang-btn {
+  cursor: pointer;
+  padding: 6px 14px;
+  border: none;
+  background: var(--accent);
+  color: var(--primary);
+  font-weight: 600;
+  border-radius: 8px;
+  margin-right: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn.active {
+  background: var(--primary);
+  color: #fff;
+}
+.wrapper {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.92);
-  max-width: 720px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 90px;
+  padding-bottom: 40px;
+}
+.card {
+  background: var(--card-bg);
+  max-width: 800px;
   width: 100%;
-  border-radius: 24px;
-  padding: 50px 44px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 48px 40px 30px 40px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(4px);
+  position: relative;
 }
 .avatar {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  margin: 0 auto 24px;
+  margin: 0 auto 28px;
   border: 3px solid #fff;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(33,44,78,0.13);
 }
 .name {
   text-align: center;
-  font-size: 32px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 8px;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
 }
 .title {
   text-align: center;
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 36px;
+  font-size: 17px;
+  color: var(--text-light);
+  margin-bottom: 42px;
+  font-weight: 500;
 }
 .section {
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 .section-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
-  color: #222;
-  margin-bottom: 14px;
+  color: var(--primary);
+  margin-bottom: 16px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 2px solid var(--accent);
 }
 .info-list {
   list-style: none;
-  color: #333;
+  color: var(--text-dark);
   line-height: 1.8;
+  font-size: 16px;
+  padding-left: 0;
+  margin-left: 0;
 }
 .info-list li {
   margin-bottom: 8px;
@@ -91,66 +160,270 @@ body::before {
   line-height: 1.9;
   font-size: 15px;
   white-space: pre-line;
+  padding-bottom: 10px;
 }
 .contact {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   margin-top: 10px;
-  font-size: 15px;
-  color: #333;
+  font-size: 16px;
+  color: var(--text-dark);
 }
 .contact span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
+}
+.works {
+  margin-top: 24px;
+}
+.works-list {
+  list-style: none;
+  color: var(--text-dark);
+  font-size: 15px;
+  padding-left: 0;
+  margin-left: 0;
+}
+.works-list li {
+  margin-bottom: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.works-list a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+  word-break: break-all;
+}
+.works-list a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .card {
+    padding: 32px 10px;
+  }
+  .navbar ul {
+    gap: 16px;
+  }
 }
 </style>
 </head>
-
 <body>
+<div class="navbar">
+  <ul>
+    <li><a href="#home" class="nav_home active" data-zh="首页" data-en="Home">首页</a></li>
+    <li><a href="#contact" class="nav_contact" data-zh="联系方式" data-en="Contact">联系方式</a></li>
+    <li><a href="#edu" class="nav_edu" data-zh="教育经历" data-en="Education">教育经历</a></li>
+    <li><a href="#courses" class="nav_courses" data-zh="主修课程" data-en="Courses">主修课程</a></li>
+    <li><a href="#bio" class="nav_bio" data-zh="个人简介" data-en="About">个人简介</a></li>
+    <li><a href="#works" class="nav_works" data-zh="主要著作" data-en="Works">主要著作</a></li>
+  </ul>
+  <div class="lang-switch">
+    <button class="lang-btn active" id="btn-zh">中文</button>
+    <button class="lang-btn" id="btn-en">English</button>
+  </div>
+</div>
+<div class="wrapper" id="home">
+  <div class="card">
+    <img class="avatar" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/65cc51c820c9736941901ab175b233d6.jpg" alt="头像">
+    <div class="name" id="name">崔凯翔</div>
+    <div class="title" id="title">华东政法大学金融学不资深学者</div>
 
-<div class="card">
-  <img class="avatar" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/65cc51c820c9736941901ab175b233d6.jpg" alt="头像">
-
-  <div class="name">崔凯翔</div>
-  <div class="title">华东政法大学金融学不资深学者</div>
-
-  <div class="section">
-    <div class="section-title">📞 联系方式</div>
-    <div class="contact">
-      <span>📩 2837844988@qq.com</span>
-      <span>📱 +86 15836137393</span>
+    <!-- 联系方式 -->
+    <div class="section" id="contact">
+      <div class="section-title" id="contact_title">📞 联系方式</div>
+      <div class="contact">
+        <span id="email">📩 2837844988@qq.com</span>
+        <span id="phone">📱 +86 15836137393</span>
+      </div>
     </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title">🎓 教育经历</div>
-    <ul class="info-list">
-      <li>2024.09 – 至今 ｜ 华东政法大学</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <div class="section-title">📚 主修课程</div>
-    <ul class="info-list">
-      <li>金融学、宏观经济学、微观经济学、金融市场与金融机构、Python</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <div class="section-title">🧿 个人简介</div>
-    <div class="bio">
-已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer 
+    <!-- 教育经历 -->
+    <div class="section" id="edu">
+      <div class="section-title" id="edu_title">🎓 教育经历</div>
+      <ul class="info-list" id="edu_list">
+        <li>2024.09 – 至今 ｜ 华东政法大学</li>
+      </ul>
+    </div>
+    <!-- 主修课程 -->
+    <div class="section" id="courses">
+      <div class="section-title" id="courses_title">📚 主修课程</div>
+      <ul class="info-list" id="courses_list">
+        <li>金融学、宏观经济学、微观经济学、金融市场与金融机构、Python</li>
+      </ul>
+    </div>
+    <!-- 简介 -->
+    <div class="section" id="bio">
+      <div class="section-title" id="bio_title">🧿 个人简介</div>
+      <div class="bio" id="bio_content">
+已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
 华籍华人|PDD资深买手|蜜雪冰城品鉴师10年国奖|
 国家级身份证持有者｜6台驾驶证待考中|
 清华北大没考雅思托福没考|诺贝尔奖觊觎者|
 四恩格尔系数|Internet冲浪达人|
 熟练掌握语：豫语+汉言｜灵植资深种植员｜
 莫欺少年穷！莫欺中年穷！莫欺老年穷！
+      </div>
+    </div>
+    <!-- 著作 -->
+    <div class="section works" id="works">
+      <div class="section-title" id="works_title">📄 主要著作</div>
+      <ul class="works-list" id="works_list">
+        <li>
+          <span class="work1">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研</span>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work1_link">下载/查看</a>
+        </li>
+        <li>
+          <span class="work2">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研</span>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work2_link">下载/查看</a>
+        </li>
+        <li>
+          <span class="work3">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研</span>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work3_link">下载/查看</a>
+        </li>
+        <li>
+          <span class="work4">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研</span>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work4_link">下载/查看</a>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
+<!-- 语言数据 -->
+<script>
+const dict = {
+  zh: {
+    name: "崔凯翔",
+    title: "华东政法大学金融学不资深学者",
+    contact_title: "📞 联系方式",
+    edu_title: "🎓 教育经历",
+    courses_title: "📚 主修课程",
+    bio_title: "🧿 个人简介",
+    works_title: "📄 主要著作",
+    nav: ["首页","联系方式","教育经历","主修课程","个人简介","主要著作"],
+    edu_list: ["2024.09 – 至今 ｜ 华东政法大学"],
+    courses_list: ["金融学、宏观经济学、微观经济学、金融市场与金融机构、Python"],
+    bio: `已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
+华籍华人|PDD资深买手|蜜雪冰城品鉴师10年国奖|
+国家级身份证持有者｜6台驾驶证待考中|
+清华北大没考雅思托福没考|诺贝尔奖觊觎者|
+四恩格尔系数|Internet冲浪达人|
+熟练掌握语：豫语+汉言｜灵植资深种植员｜
+莫欺少年穷！莫欺中年穷！莫欺老年穷！`,
+    works: [
+      "【只��】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研",
+      "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研",
+      "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研",
+      "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研"
+    ],
+    worklink: [
+      document.getElementById('work1_link').href,
+      document.getElementById('work2_link').href,
+      document.getElementById('work3_link').href,
+      document.getElementById('work4_link').href,
+    ],
+    email: "📩 2837844988@qq.com",
+    phone: "📱 +86 15836137393"
+  },
+  en: {
+    name: "Kaixiang Cui",
+    title: "Non-senior Scholar of Finance, East China University of Political Science and Law",
+    contact_title: "📞 Contact",
+    edu_title: "🎓 Education",
+    courses_title: "📚 Courses",
+    bio_title: "🧿 About Me",
+    works_title: "📄 Major Publications",
+    nav: ["Home","Contact","Education","Courses","About","Works"],
+    edu_list: ["2024.09 – Present | East China University of Political Science and Law"],
+    courses_list: ["Finance, Macroeconomics, Microeconomics, Financial Markets & Institutions, Python"],
+    bio: `Visited 0 countries | Dreamed >100 countries | Hybrid Chinese descent | Chinese boarding student | Offer from Garriton
+Chinese citizen | Senior buyer at PDD | 10-year National Prize at Mixue Bingcheng tester
+Holder of national-level ID | 6 driver's licenses pending
+No TOEFL/IELTS, no Tsinghua/Peking | Nobel Prize aspirant
+Four Engel coefficients | Internet surfing expert
+Fluent in: Henan + Mandarin | Skilled botanic cultivator
+Never underestimate the youth, nor the middle-aged, nor the elderly!`,
+    works: [
+      "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Project research report — Based on field research in Zhongjiang Guamian Village",
+      "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Case retrieval report — Based on field research in Zhongjiang Guamian Village",
+      "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Field research report — Based on field research in Zhongjiang Guamian Village",
+      "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rural e-commerce legal risk avoidance guide — Based on field research in Zhongjiang Guamian Village"
+    ],
+    worklink: [
+      document.getElementById('work1_link').href,
+      document.getElementById('work2_link').href,
+      document.getElementById('work3_link').href,
+      document.getElementById('work4_link').href,
+    ],
+    email: "📩 2837844988@qq.com",
+    phone: "📱 +86 15836137393"
+  }
+};
 
+function switchLang(lang) {
+  document.getElementById("btn-zh").classList.toggle("active", lang==="zh");
+  document.getElementById("btn-en").classList.toggle("active", lang==="en");
+  //导航栏
+  const navClasses = ["nav_home","nav_contact","nav_edu","nav_courses","nav_bio","nav_works"];
+  navClasses.forEach((cls,i)=>{
+      let el = document.querySelector("."+cls);
+      el.textContent = dict[lang].nav[i];
+  });
+  //基本内容
+  document.getElementById("name").textContent = dict[lang].name;
+  document.getElementById("title").textContent = dict[lang].title;
+  document.getElementById("contact_title").textContent = dict[lang].contact_title;
+  document.getElementById("edu_title").textContent = dict[lang].edu_title;
+  document.getElementById("courses_title").textContent = dict[lang].courses_title;
+  document.getElementById("bio_title").textContent = dict[lang].bio_title;
+  document.getElementById("works_title").textContent = dict[lang].works_title;
+  //联系方式
+  document.getElementById("email").textContent = dict[lang].email;
+  document.getElementById("phone").textContent = dict[lang].phone;
+  //教育
+  let eduList=document.getElementById("edu_list");
+  eduList.innerHTML="";
+  dict[lang].edu_list.forEach(l=>{
+      let li=document.createElement("li");
+      li.textContent=l;
+      eduList.appendChild(li);
+  });
+  //课程
+  let coursesList=document.getElementById("courses_list");
+  coursesList.innerHTML="";
+  dict[lang].courses_list.forEach(l=>{
+      let li=document.createElement("li");
+      li.textContent=l;
+      coursesList.appendChild(li);
+  });
+  //简介
+  document.getElementById("bio_content").textContent=dict[lang].bio;
+  //著作
+  let worksList=document.getElementById("works_list");
+  worksList.innerHTML="";
+  dict[lang].works.forEach((text,i)=>{
+      let li=document.createElement("li");
+      let span=document.createElement("span");
+      span.textContent=text;
+      let a=document.createElement("a");
+      a.textContent= lang==="zh"?"下载/查看":"Download/View";
+      a.href=dict[lang].worklink[i];
+      a.target="_blank";
+      li.appendChild(span);
+      li.appendChild(a);
+      worksList.appendChild(li);
+  });
+}
+//初始中文
+switchLang("zh");
+//事件绑定
+document.getElementById("btn-zh").onclick=()=>switchLang("zh");
+document.getElementById("btn-en").onclick=()=>switchLang("en");
+</script>
 </body>
 </html>
