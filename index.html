@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>崔凯翔 | 个人主页</title>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --card-bg: rgba(255,255,255,0.98);
-  --mask-bg: rgba(0,0,0,0.22);
+  --mask-bg: rgba(0,0,0,0.15);
   --primary: #214478;
   --secondary: #547ca8;
   --accent: #e6eaf0;
@@ -16,25 +16,30 @@
   --text-light: #555;
   --shadow: 0 8px 32px rgba(33,44,78,0.09);
 }
-body,html {
+/* 背景填充，随滚动移动 */
+body, html {
   width: 100%;
   min-height: 100vh;
+  margin: 0;
   font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   box-sizing: border-box;
   background-image: url("https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/801ef4138e53d1cab7a88924c3d1d45e.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;    /* 填满整个界面 */
   background-position: center top;
-  background-attachment: fixed;
+  background-attachment: scroll; /* 背景随滚动移动 */
+  transition: background 0.8s;
 }
 body::before {
   content: '';
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   background: var(--mask-bg);
   z-index: 0;
   pointer-events: none;
 }
+
+/* 导航栏动画效果 */
 .navbar {
   position: fixed;
   top: 0;
@@ -46,6 +51,12 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: navFadeIn 1.2s ease;
+}
+@keyframes navFadeIn {
+  0% { opacity: 0; transform: translateY(-30px);}
+  70% { opacity: 0.8; }
+  100% { opacity: 1; transform: translateY(0);}
 }
 .navbar ul {
   display: flex;
@@ -61,14 +72,22 @@ body::before {
   text-decoration: none;
   color: var(--primary);
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
   padding: 8px 14px;
   border-radius: 8px;
+  box-shadow: 0 0 0 transparent;
+  position: relative;
 }
 .navbar a:hover, .navbar a.active {
   color: var(--secondary);
   background: var(--accent);
 }
+/* 导航栏按钮点击动效 */
+.navbar a:active {
+  background: #bcd4e6;
+}
+
+/* 语言切换动效 */
 .lang-switch {
   margin-left: 24px;
   font-size: 15px;
@@ -82,12 +101,19 @@ body::before {
   font-weight: 600;
   border-radius: 8px;
   margin-right: 8px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.3s;
 }
 .lang-btn.active {
   background: var(--primary);
   color: #fff;
+  box-shadow: 0 0 18px #21447833;
 }
+.lang-btn:active {
+  background: #699dfb;
+  color: #fff;
+}
+
+/* 主卡片浮现动画 */
 .wrapper {
   position: relative;
   z-index: 2;
@@ -107,7 +133,15 @@ body::before {
   box-shadow: var(--shadow);
   backdrop-filter: blur(4px);
   position: relative;
+  animation: cardFadeIn 1.6s cubic-bezier(0.44,0.23,0.5,1.08) 0.3s;
+  animation-fill-mode: both;
 }
+@keyframes cardFadeIn {
+  0% { opacity: 0; transform: translateY(50px) scale(0.98);}
+  60% { opacity: 0.7; }
+  100% { opacity: 1; transform: translateY(0) scale(1);}
+}
+/* 头像动画边框（渐变流动） */
 .avatar {
   width: 130px;
   height: 130px;
@@ -117,7 +151,27 @@ body::before {
   margin: 0 auto 28px;
   border: 3px solid #fff;
   box-shadow: 0 6px 20px rgba(33,44,78,0.13);
+  /* 动态渐变边框效果 */
+  position: relative;
+  z-index: 1;
 }
+.avatar::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(#214478, #e6eaf0, #547ca8, #214478);
+  opacity: 0.55;
+  z-index: 2;
+  animation: borderSpin 4s linear infinite;
+}
+@keyframes borderSpin {
+  100% {transform: translateX(-50%) rotate(360deg);}
+}
+
 .name {
   text-align: center;
   font-size: 36px;
@@ -125,6 +179,7 @@ body::before {
   color: var(--primary);
   margin-bottom: 12px;
   letter-spacing: 2px;
+  animation: textPop 1.2s;
 }
 .title {
   text-align: center;
@@ -133,6 +188,12 @@ body::before {
   margin-bottom: 42px;
   font-weight: 500;
 }
+@keyframes textPop {
+  0% { opacity: 0; transform: scale(0.8);}
+  80% { opacity: 1;}
+  100% { transform: scale(1);}
+}
+
 .section {
   margin-bottom: 36px;
 }
@@ -143,6 +204,12 @@ body::before {
   margin-bottom: 16px;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
+  animation: sectionSlideUp 0.9s;
+}
+@keyframes sectionSlideUp {
+  0% { opacity: 0; transform: translateY(14px);}
+  80% { opacity: 1;}
+  100% { transform: translateY(0);}
 }
 .info-list {
   list-style: none;
@@ -192,25 +259,36 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
+  animation: worksSlideIn 1s;
+}
+@keyframes worksSlideIn {
+  0% { opacity: 0; transform: translateX(-20px);}
+  80% { opacity: 1;}
+  100% { transform: translateX(0);}
 }
 .works-list a {
   color: var(--primary);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
   word-break: break-all;
+  border-radius: 6px;
+  padding: 2px 8px;
+  margin-left: 6px;
 }
 .works-list a:hover {
   color: var(--secondary);
+  background: var(--accent);
   text-decoration: underline;
+  animation: pulse 0.2s;
+}
+@keyframes pulse {
+  0% {background: #e6eaf0;}
+  100% {background: #547ca822;}
 }
 @media (max-width: 900px) {
-  .card {
-    padding: 32px 10px;
-  }
-  .navbar ul {
-    gap: 16px;
-  }
+  .card { padding: 32px 10px; }
+  .navbar ul { gap: 16px; }
 }
 </style>
 </head>
@@ -234,7 +312,6 @@ body::before {
     <img class="avatar" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/65cc51c820c9736941901ab175b233d6.jpg" alt="头像">
     <div class="name" id="name">崔凯翔</div>
     <div class="title" id="title">华东政法大学金融学不资深学者</div>
-
     <!-- 联系方式 -->
     <div class="section" id="contact">
       <div class="section-title" id="contact_title">📞 联系方式</div>
@@ -276,26 +353,26 @@ body::before {
       <ul class="works-list" id="works_list">
         <li>
           <span class="work1">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研</span>
-          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work1_link">下载/查看</a>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank">下载/查看</a>
         </li>
         <li>
           <span class="work2">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研</span>
-          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work2_link">下载/查看</a>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank">下载/查看</a>
         </li>
         <li>
           <span class="work3">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研</span>
-          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work3_link">下载/查看</a>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank">下载/查看</a>
         </li>
         <li>
           <span class="work4">【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研</span>
-          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%5B%E5%8F%AA%E8%AF%BB%5D%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank" id="work4_link">下载/查看</a>
+          <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx" target="_blank">下载/查看</a>
         </li>
       </ul>
     </div>
   </div>
 </div>
-<!-- 语言数据 -->
 <script>
+// 语言切换
 const dict = {
   zh: {
     name: "崔凯翔",
@@ -316,16 +393,16 @@ const dict = {
 熟练掌握语：豫语+汉言｜灵植资深种植员｜
 莫欺少年穷！莫欺中年穷！莫欺老年穷！`,
     works: [
-      "【只��】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研",
+      "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研",
       "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研",
       "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研",
       "【只读】卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研"
     ],
     worklink: [
-      document.getElementById('work1_link').href,
-      document.getElementById('work2_link').href,
-      document.getElementById('work3_link').href,
-      document.getElementById('work4_link').href,
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx"
     ],
     email: "📩 2837844988@qq.com",
     phone: "📱 +86 15836137393"
@@ -355,26 +432,23 @@ Never underestimate the youth, nor the middle-aged, nor the elderly!`,
       "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rural e-commerce legal risk avoidance guide — Based on field research in Zhongjiang Guamian Village"
     ],
     worklink: [
-      document.getElementById('work1_link').href,
-      document.getElementById('work2_link').href,
-      document.getElementById('work3_link').href,
-      document.getElementById('work4_link').href,
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx"
     ],
     email: "📩 2837844988@qq.com",
     phone: "📱 +86 15836137393"
   }
 };
-
 function switchLang(lang) {
   document.getElementById("btn-zh").classList.toggle("active", lang==="zh");
   document.getElementById("btn-en").classList.toggle("active", lang==="en");
-  //导航栏
   const navClasses = ["nav_home","nav_contact","nav_edu","nav_courses","nav_bio","nav_works"];
   navClasses.forEach((cls,i)=>{
       let el = document.querySelector("."+cls);
       el.textContent = dict[lang].nav[i];
   });
-  //基本内容
   document.getElementById("name").textContent = dict[lang].name;
   document.getElementById("title").textContent = dict[lang].title;
   document.getElementById("contact_title").textContent = dict[lang].contact_title;
@@ -382,10 +456,8 @@ function switchLang(lang) {
   document.getElementById("courses_title").textContent = dict[lang].courses_title;
   document.getElementById("bio_title").textContent = dict[lang].bio_title;
   document.getElementById("works_title").textContent = dict[lang].works_title;
-  //联系方式
   document.getElementById("email").textContent = dict[lang].email;
   document.getElementById("phone").textContent = dict[lang].phone;
-  //教育
   let eduList=document.getElementById("edu_list");
   eduList.innerHTML="";
   dict[lang].edu_list.forEach(l=>{
@@ -393,7 +465,6 @@ function switchLang(lang) {
       li.textContent=l;
       eduList.appendChild(li);
   });
-  //课程
   let coursesList=document.getElementById("courses_list");
   coursesList.innerHTML="";
   dict[lang].courses_list.forEach(l=>{
@@ -401,9 +472,7 @@ function switchLang(lang) {
       li.textContent=l;
       coursesList.appendChild(li);
   });
-  //简介
   document.getElementById("bio_content").textContent=dict[lang].bio;
-  //著作
   let worksList=document.getElementById("works_list");
   worksList.innerHTML="";
   dict[lang].works.forEach((text,i)=>{
@@ -419,9 +488,9 @@ function switchLang(lang) {
       worksList.appendChild(li);
   });
 }
-//初始中文
+// 初始中文
 switchLang("zh");
-//事件绑定
+// 点击事件
 document.getElementById("btn-zh").onclick=()=>switchLang("zh");
 document.getElementById("btn-en").onclick=()=>switchLang("en");
 </script>
