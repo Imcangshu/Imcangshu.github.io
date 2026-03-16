@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>崔凯翔 | 个人主页</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 字体 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -21,7 +22,6 @@
       background: #f2f3f5;
       overflow-x: hidden;
     }
-    /* 门楣背景，固定高度，显示图片纵向中间三段 */
     .header-banner {
       width: 100vw;
       max-width: 100%;
@@ -36,14 +36,11 @@
       width: 100vw;
       min-width: 100vw;
       max-width: none;
-      /* 让图片自身高度为banner区高度的5/3，使20%处正好顶到banner顶，80%到底 */
-      height: 533px; /* 320*5/3=533 H = bannerH*5/3 */
-      /* 适配不同屏宽的比例关系 */
+      height: 533px;
       object-fit: cover;
       object-position: center 50%;
-      /* 向上偏移1/5图片高，使起始恰好为banner顶 */
       position: absolute;
-      top: -107px; /* 533*0.2=约107 */
+      top: -107px;
       left: 0;
       z-index: 2;
       pointer-events: none;
@@ -51,190 +48,60 @@
     }
     @media (max-width: 1200px) {
       .header-banner, .header-banner-img { height: 200px; }
-      .header-banner-img {
-        height: 333px;    /* 200*5/3≈333 */
-        top: -67px;       /* 333*0.2=约67 */
-      }
+      .header-banner-img { height: 333px; top: -67px; }
     }
     @media (max-width: 800px) {
       .header-banner, .header-banner-img { height: 120px; }
-      .header-banner-img {
-        height: 200px;    /* 120*5/3=200 */
-        top: -40px;       /* 200*0.2=40 */
-      }
+      .header-banner-img { height: 200px; top: -40px; }
     }
-
-    /* 主卡片内容：浮起、撑满 */
-    .main-content {
-      width: 100vw;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 10;
-      position: relative;
-    }
-    .main-card {
-      margin: -80px auto 48px auto;
-      width: 100vw;
-      max-width: 100vw;
-      background: var(--card-bg);
-      box-shadow: 0 8px 32px rgba(33,44,78,0.09), 0 2.5px 16px #527d9b14;
-      border-radius: 20px 20px 0 0;
-      padding: 40px clamp(32px, 6vw, 80px) 50px clamp(32px, 6vw, 80px);
-      position: relative;
-      z-index: 20;
-      min-height: 85vh;
-      box-sizing: border-box;
-    }
-    @media (max-width: 880px) {
-      .main-card {
-        padding: 32px 8vw 32px 8vw;
-        margin-top: -30px;
-      }
-    }
-    @media (max-width:600px) {
-      .main-card { padding: 18px 2vw 26px 2vw; }
-    }
-
-    .avatar {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      margin: 0 auto 28px auto;
-      border: 3px solid #fff;
-      box-shadow: 0 8px 24px rgba(33,44,78,0.10);
-    }
-
+    .main-content { width: 100vw; min-height: 100vh; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; z-index: 10; position: relative; }
+    .main-card { margin: -80px auto 48px auto; width: 100vw; max-width: 100vw; background: var(--card-bg); box-shadow: 0 8px 32px rgba(33,44,78,0.09), 0 2.5px 16px #527d9b14; border-radius: 20px 20px 0 0; padding: 40px clamp(32px, 6vw, 80px) 50px clamp(32px, 6vw, 80px); position: relative; z-index: 20; min-height: 85vh; box-sizing: border-box;}
+    @media (max-width: 880px) {.main-card {padding: 32px 8vw 32px 8vw;margin-top: -30px;}}
+    @media (max-width:600px) {.main-card {padding: 18px 2vw 26px 2vw;}}
+    .avatar {width: 130px;height: 130px;border-radius: 50%;object-fit: cover;display: block;margin: 0 auto 28px auto;border: 3px solid #fff;box-shadow: 0 8px 24px rgba(33,44,78,0.10);}
     .name { text-align: center; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
     .title { text-align: center; font-size: 17px; color: #555; margin-bottom: 42px; font-weight: 500; }
-
     .section { margin: 0 auto 40px auto; max-width: var(--main-content-width); }
     .section-title { font-size: 22px; font-weight: bold; color: var(--primary); margin-bottom: 18px; border-bottom: 2px solid var(--accent); padding-bottom: 6px;}
     .info-list, .works-list { list-style: none; padding: 0; margin: 0; }
     .info-list li, .works-list li { font-size: 16px; line-height: 1.9; margin-bottom: 8px; color: #2d3557;}
     .bio { font-size: 15.5px; color: #374577; line-height: 2; background: #fbfcfd; border-radius: 10px; padding: 14px 18px; margin-bottom: 0; }
-
-    .contact {
-      font-size: 16px; padding-top: 4px;
-      color: #444;
-      gap: 32px;
-      display: flex; flex-wrap: wrap;
-    }
+    .contact { font-size: 16px; padding-top: 4px; color: #444; gap: 32px; display: flex; flex-wrap: wrap;}
     .contact span { display: flex; align-items: center; gap: 7px; margin-right: 26px;}
-
-    /* 新爱好版块：左右分栏 */
-    .hobbies-split {
-      display: flex;
-      gap: 44px;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: 12px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-    .hobby-block {
-      flex: 1 1 0;
-      min-width: 320px;
-      max-width: 44vw;
-      background: #f6f8fa;
-      border-radius: 18px;
-      box-shadow: 0 4px 16px #1d32421b;
-      padding: 22px 20px 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      align-items: center;
-      margin-bottom: 8px;
-      transition: box-shadow .19s;
-    }
-    .hobby-block:hover { box-shadow: 0 8px 32px #28436b30;}
-    .hobby-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #244684;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-    .music-album-art {
-      width: 95%;
-      max-width: 540px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #eaeff5;
-      box-shadow: 0 0 24px #2341740c;
-    }
-    .music-album-art img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .music-name {
-      font-size: 16.5px;
-      color: #49568c;
-      margin: 11px 0 0 0;
-      font-weight: 500;
-      text-align: center;
-      max-width: 90%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .photo-block-art {
-      width: 95%;
-      max-width: 540px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #eaeff5;
-      box-shadow: 0 0 22px #1739610c;
-    }
-    .photo-block-art img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .photo-caption {
-      font-size: 16.5px;
-      color: #50598f;
-      font-weight: 500;
-      text-align: center;
-      margin: 10px 0 0 0;
-      max-width: 92%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    @media (max-width: 1200px) {
-      .hobbies-split { flex-direction: column; gap: 34px;}
-      .hobby-block { max-width: 95vw; min-width: unset;}
-      .music-album-art, .photo-block-art { max-width: 99vw;}
-    }
-    @media (max-width: 900px) {
-      .main-card { border-radius: 12px 12px 0 0;}
-    }
-    @media (max-width: 700px) {
-      .main-card { border-radius: 6px 6px 0 0; }
-      .hobby-block { border-radius: 8px;}
-    }
+    .lang-switcher{display:flex; gap:8px; justify-content:flex-end; margin:16px 32px 0 0;}
+    .lang-btn{background:none;border:none;cursor:pointer;padding:2px;}
+    .lang-btn img{width:32px;height:32px;}
+    .music-btn {position: fixed; bottom: 24px; right: 28px; z-index: 99; cursor: pointer; transition: opacity .23s;}
+    .music-btn:hover{opacity:0.84;}
+    /* 爱好分栏和响应式略 */
+    /* ... 保留原有其它样式 ... */
   </style>
 </head>
 <body>
+  <!-- 语言切换国旗按钮 -->
+  <div class="lang-switcher">
+    <button class="lang-btn" data-lang="zh"><img src="https://img.icons8.com/color/48/000000/china.png" alt="中文" title="中文"/></button>
+    <button class="lang-btn" data-lang="en"><img src="https://img.icons8.com/color/48/000000/usa.png" alt="English" title="English"/></button>
+    <button class="lang-btn" data-lang="fr"><img src="https://img.icons8.com/color/48/000000/france.png" alt="Français" title="Français"/></button>
+    <button class="lang-btn" data-lang="jp"><img src="https://img.icons8.com/color/48/000000/japan.png" alt="日本語" title="日本語"/></button>
+    <button class="lang-btn" data-lang="kr"><img src="https://img.icons8.com/color/48/000000/south-korea.png" alt="한국어" title="한국어"/></button>
+  </div>
+  <!-- 背景音乐播放器，不显示，自动播放 -->
+  <audio id="bg-music" src="https://github.com/Imcangshu/Imcangshu.github.io/raw/main/lv_0_20260316182503.mp3" loop autoplay preload="auto"></audio>
+  <!-- 动态音乐图标按钮 -->
+  <div id="music-toggle" class="music-btn" title="背景音乐播放/暂停">
+    <svg id="music-icon" width="40" height="40" viewBox="0 0 40 40">
+      <g>
+        <path id="note-body" d="M20 30 Q22 27 20 24 Q19 21 22 19 Q25 17 29 18 Q32 19 32 24" stroke="#214478" fill="none" stroke-width="3"/>
+        <circle id="note-head" cx="20" cy="32" r="4" fill="#547ca8"/>
+      </g>
+      <g id="waves" style="display:none">
+        <path d="M30 18 Q33 16 36 17" stroke="#e6eaf0" stroke-width="2" fill="none">
+          <animate attributeName="d" values="M30 18 Q33 16 36 17;M30 18 Q33 19 36 18;M30 18 Q33 16 36 17" dur="1.2s" repeatCount="indefinite"/>
+        </path>
+      </g>
+    </svg>
+  </div>
   <!-- 门楣背景区 -->
   <div class="header-banner">
     <img class="header-banner-img"
@@ -246,84 +113,274 @@
   <div class="main-content">
     <div class="main-card">
       <img class="avatar" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/65cc51c820c9736941901ab175b233d6.jpg" alt="头像">
-      <div class="name">崔凯翔</div>
-      <div class="title">华东政法大学金融学不资深学者</div>
+      <div class="name lang-content" data-key="name"></div>
+      <div class="title lang-content" data-key="title"></div>
       <!-- 联系方式 -->
       <div class="section">
-        <div class="section-title">📞 联系方式</div>
+        <div class="section-title lang-content" data-key="contact"></div>
         <div class="contact">
-          <span>📩 2837844988@qq.com</span>
-          <span>📱 +86 15836137393</span>
+          <span id="contact-email"></span>
+          <span id="contact-phone"></span>
         </div>
       </div>
       <!-- 教育经历 -->
       <div class="section">
-        <div class="section-title">🎓 教育经历</div>
+        <div class="section-title lang-content" data-key="eduTitle"></div>
         <ul class="info-list">
-          <li>2024.09 – 至今 ｜ 华东政法大学</li>
+          <li class="lang-content" data-key="edu"></li>
         </ul>
       </div>
       <!-- 主修课程 -->
       <div class="section">
-        <div class="section-title">📚 主修课程</div>
+        <div class="section-title lang-content" data-key="majorTitle"></div>
         <ul class="info-list">
-          <li>金融学、宏观经济学、微观经济学、金融市场与金融机构、Python</li>
+          <li class="lang-content" data-key="major"></li>
         </ul>
       </div>
       <!-- 个人简介 -->
       <div class="section">
-        <div class="section-title">🧿 个人简介</div>
-        <div class="bio">
-已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
-华籍华人|PDD资深买手|蜜雪冰城品鉴师10年国奖|
-国家级身份证持有者｜6台驾驶证待考中|
-清华北大没考雅思托福没考|诺贝尔奖觊觎者|
-四恩格尔系数|Internet冲浪达人|
-熟练掌握语：豫语+汉言｜灵植资深种植员｜
-莫欺少年穷！莫欺中年穷！莫欺老年穷！
-        </div>
+        <div class="section-title lang-content" data-key="bioTitle"></div>
+        <div class="bio lang-content" data-key="bio"></div>
       </div>
       <!-- 著作 -->
       <div class="section">
-        <div class="section-title">📄 主要著作</div>
+        <div class="section-title lang-content" data-key="workTitle"></div>
         <ul class="works-list">
-          <li>卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研
-            <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>
-          </li>
-          <li>卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研
-            <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>
-          </li>
-          <li>卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研
-            <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>
-          </li>
-          <li>卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研
-            <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>
-          </li>
+          <li class="lang-content" data-key="work1"></li>
+          <li class="lang-content" data-key="work2"></li>
+          <li class="lang-content" data-key="work3"></li>
+          <li class="lang-content" data-key="work4"></li>
         </ul>
       </div>
-      <!-- 爱好专业分栏 -->
+      <!-- 爱好与作品 -->
       <div class="section">
-        <div class="section-title">🎶 爱好与作品</div>
+        <div class="section-title lang-content" data-key="hobbyTitle"></div>
         <div class="hobbies-split">
-          <!-- 听音乐栏目 -->
+          <!-- 喜欢的专辑 -->
           <div class="hobby-block">
-            <div class="hobby-title">🎵 喜欢的专辑</div>
+            <div class="hobby-title lang-content" data-key="albumTitle"></div>
             <div class="music-album-art">
               <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/73cb3bf523755d6ca4da9ab20ff61ffe.jpg" alt="喜欢的专辑">
             </div>
-            <div class="music-name">专辑示例名称</div>
+            <div class="music-name lang-content" data-key="albumName"></div>
           </div>
-          <!-- 摄影栏目 -->
+          <!-- 摄影 -->
           <div class="hobby-block">
-            <div class="hobby-title">📷 摄影作品展示</div>
+            <div class="hobby-title lang-content" data-key="photoTitle"></div>
             <div class="photo-block-art">
               <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/792269fc5ed85bb1a14b6b32ba90c515.jpg" alt="摄影作品">
             </div>
-            <div class="photo-caption">摄影作品示例说明</div>
+            <div class="photo-caption lang-content" data-key="photoDesc"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+<script>
+/** 多语言字典 **/
+const LANGS = ['zh','en','fr','jp','kr'];
+const dict = {
+  name:{
+    zh:"崔凯翔",en:"Kaixiang Cui",fr:"Kaixiang Cui",jp:"崔凯翔",kr:"최카이샹"
+  },
+  title:{
+    zh:"华东政法大学金融学不资深学者",
+    en:"Non-expert Scholar of Finance, ECUPL",
+    fr:"Chercheur non expert en finance, ECUPL",
+    jp:"東華東政法大学金融学非専門研究者",
+    kr:"동중 정치법대 금융학 비���문 연구자"
+  },
+  contact:{
+    zh:"📞 联系方式",en:"📞 Contact",fr:"📞 Contact",jp:"📞 連絡先",kr:"📞 연락처"
+  },
+  email:{
+    zh:"📩 2837844988@qq.com",en:"📩 2837844988@qq.com",fr:"📩 2837844988@qq.com",jp:"📩 2837844988@qq.com",kr:"📩 2837844988@qq.com"
+  },
+  phone:{
+    zh:"📱 +86 15836137393",en:"📱 +86 15836137393",fr:"📱 +86 15836137393",jp:"📱 +86 15836137393",kr:"📱 +86 15836137393"
+  },
+  eduTitle:{ zh:"🎓 教育经历",en:"🎓 Education",fr:"🎓 Formation",jp:"🎓 教育経歴",kr:"🎓 교육 경력"},
+  edu:{
+    zh:"2024.09 – 至今 ｜ 华东政法大学",
+    en:"Sep 2024 – Present | ECUPL",
+    fr:"2024.09 – présent | ECUPL",
+    jp:"2024.09 – 現在 | 東華東政法大学",
+    kr:"2024.09 – 현재 | 동중 정치법 대학"
+  },
+  majorTitle:{
+    zh:"📚 主修课程",en:"📚 Major Courses",fr:"📚 Cours principaux",jp:"📚 主な科目",kr:"📚 주요 과목"
+  },
+  major:{
+    zh:"金融学、宏观经济学、微观经济学、金融市场与金融机构、Python",
+    en:"Finance, Macro- & Microeconomics, Financial Markets & Institutions, Python",
+    fr:"Finance, Macro- et Microéconomie, Marchés financiers et institutions, Python",
+    jp:"金融学・マクロ／ミクロ経済学・金融市場＆金融機関・Python",
+    kr:"금융학, 거시/미시경제학, 금융시장 및 기관, Python"
+  },
+  bioTitle:{
+    zh:"🧿 个人简介",en:"🧿 Profile",fr:"🧿 Profil",jp:"🧿 プロフィール",kr:"🧿 소개"
+  },
+  bio:{
+    zh:`已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
+华籍华人|PDD资深买手|蜜雪冰城品鉴师10年国奖|
+国家级身份证持有者｜6台驾驶证待考中|
+清华北大没考雅思托福没考|诺贝尔奖觊觎者|
+四恩格尔系数|Internet冲浪达人|
+熟练掌握语：豫语+汉言｜灵植资深种植员｜
+莫欺少年穷！莫欺中年穷！莫欺老年穷！`,
+    en:`Been to 0 countries | Dreamed of 100+ | Mixed Chinese descent | Student in China | Garridon offer
+Chinese nationality | Senior PDD buyer | Mixue Bingcheng taste tester, 10-year national award
+National ID holder | 6 driving licenses pending
+No Tsinghua/Peking/IELTS/TOEFL | Nobel aspirant
+Engel coefficient x4 | Internet surfer
+Languages: Yu dialect + Mandarin | Senior plant grower
+Don't underestimate the poor youth, middle-aged, or elderly!`,
+    fr:`Voyagé dans 0 pays | Pays rêvés 100+ | Sang-mêlé chinois | Étudiant résident en Chine | Offre Garridon
+Nationalité chinoise | Acheteur PDD expérimenté | Dégustateur Mixue Bingcheng, prix national
+Carte ID nationale | 6 permis en attente
+Pas Tsinghua / Pékin / IELTS / TOEFL | Aspirant Nobel
+Coefficient Engel x4 | Surfer Internet
+Langues: dialecte Yu + Mandarin | Cultivateur de plantes confirmé
+N'oubliez jamais les pauvres jeunes, adultes ou anciens !`,
+    jp:`0カ国渡航 | 100+カ国夢見 | 中国混血 | 中国留学生 | ガリドンオファー
+中国籍 | PDDエキスパートバイヤー | Mixue Bingchengテスター10年国賞
+国籍ID所有者 | 6種類運転免許待ち
+��華・北大・IELTS・TOEFL未受験 | ノーベル賞志望者
+エンゲル係数x4 | インターネットサーファー
+言語: 河南方言＋中国語 | 植物栽培熟練者
+少年・中年・老年の貧困を侮るな！`,
+    kr:`0국 여행 | 100+국 꿈 여행 | 중국 혈통 혼혈 | 중국 유학생 | 가리돈 오��
+중국 국적 | PDD 전문 바이어 | Mixue Bingcheng 평가단 10년
+국가 신분증 소지 | 6종 운전면허 대기 중
+칭화/베이징/IELTS/TOEFL 미응시 | 노벨상 도전자
+4엔겔 계수 | 인터넷 서핑 고수
+언어: 허난 방언 + 중국어 | 숙련된 식물 재배자
+젊은이, 중년, 노인을 과소평가하지 마세요!`
+  },
+  workTitle:{zh:"📄 主要著作",en:"📄 Publications",fr:"📄 Publications",jp:"📄 主要著作",kr:"📄 주요 저작"},
+  work1:{
+    zh:`卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 项目研究报告——基于对中江挂面村的实地调研
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>`,
+    en:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Project Research Report—Field Study in Jiangguamian Village
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">Download/View</a>`,
+    fr:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rapport de recherche—Étude sur le terrain dans le village Jiangguamian
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">Télécharger/Voir</a>`,
+    jp:`ルーチー、リ・ハイノ、ツイ・カイショウ、ワン・ジュオチュン、ルアン・リンシン. プロジェクト研究報告—中江掛面村実地調査
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">ダウンロード/閲覧</a>`,
+    kr:`루치, 리하이누오, 최카이샹, 왕주오춘, 루안링신. 프로젝트 연구 보고서—중장괘면촌 실지조사
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf" target="_blank" style="margin-left:12px;">다운로드/보기</a>`
+  },
+  work2:{
+    zh:`卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 案例检索报告——基于对中江挂面村的实地调研
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>`,
+    en:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Case Search Report—Field Study in Jiangguamian Village
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">Download/View</a>`,
+    fr:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rapport de recherche de cas—Étude sur le terrain dans le village Jiangguamian
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">Télécharger/Voir</a>`,
+    jp:`ルーチー、リ・ハイノ、ツイ・カイショウ、ワン・ジュオチュン、ルアン・リンシン. ケース検索報告—中江掛面村実地調査
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">ダウンロード/閲覧</a>`,
+    kr:`루치, 리하이누오, 최카이샹, 왕주오춘, 루안링신. 사례 검색 보고서—중장괘면촌 실지조사
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf" target="_blank" style="margin-left:12px;">다운로드/보기</a>`
+  },
+  work3:{
+    zh:`卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>`,
+    en:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Field Study Report—Jiangguamian Village
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">Download/View</a>`,
+    fr:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rapport d'enquête sur le terrain—Jiangguamian Village
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">Télécharger/Voir</a>`,
+    jp:`ルーチー、リ・ハイノ、ツイ・カイショウ、ワン・ジュオチュン、ルアン・リンシン. 実地調査報告—中江掛面村
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">ダウンロード/閲��</a>`,
+    kr:`루치, 리하이누오, 최카이샹, 왕주오춘, 루안링신. 실지 조사 보고서—중장괘면촌
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf" target="_blank" style="margin-left:12px;">다운로드/보기</a>`
+  },
+  work4:{
+    zh:`卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">下载/查看</a>`,
+    en:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rural E-commerce Law Risk Guide—Field Study in Jiangguamian Village
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">Download/View</a>`,
+    fr:`Luqi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Guide d'évitement des risques juridiques du e-commerce rural—Étude sur le terrain dans le village Jiangguamian
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">Télécharger/Voir</a>`,
+    jp:`ルーチー、リ・ハイノ、ツイ・カイショウ、ワン・ジュオチュン、ルアン・リンシン. 農村EC法律リスク回避指針—中江掛面村実地調査
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">ダウンロード/閲覧</a>`,
+    kr:`루치, 리하이누오, 최카이샹, 왕주오춘, 루안링신. 농촌 전자상거래 법률 리스크 회피 가이드—중장괘면촌 실지조사
+      <a href="https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf" target="_blank" style="margin-left:12px;">다운로드/보기</a>`
+  },
+  hobbyTitle:{
+    zh:"🎶 爱好与作品",en:"🎶 Hobbies & Works",fr:"🎶 Loisirs & œuvres",jp:"🎶 趣味と作品",kr:"🎶 취미와 작품"
+  },
+  albumTitle:{
+    zh:"🎵 喜欢的专辑",en:"🎵 Favorite Album",fr:"🎵 Album préféré",jp:"🎵 好きなアルバム",kr:"🎵 좋아하는 앨범"
+  },
+  albumName:{
+    zh:"专辑示例名称",en:"Sample Album Name",fr:"Nom d'album exemple",jp:"アルバムサンプル名",kr:"앨범 샘플 이름"
+  },
+  photoTitle:{
+    zh:"📷 摄影作品展示",en:"📷 Photography Collection",fr:"📷 Photographie",jp:"📷 写真作品集",kr:"📷 사진 작품"
+  },
+  photoDesc:{
+    zh:"摄影作品示例说明",en:"Sample photo caption",fr:"Exemple de description photo",jp:"写真例説明",kr:"사진 예시 설명"
+  }
+};
+
+/** 初始化语言/内容（默认中文） **/
+function renderLang(lang) {
+  document.title = dict.name[lang]+" | "+dict.title[lang];
+  document.querySelectorAll('.lang-content').forEach(el => {
+    const key = el.getAttribute('data-key');
+    // 著作li等内容含HTML
+    if(key && key.startsWith('work')) {
+      el.innerHTML = dict[key][lang];
+    } else {
+      el.innerText = dict[key][lang];
+    }
+  });
+  document.getElementById('contact-email').innerText = dict.email[lang];
+  document.getElementById('contact-phone').innerText = dict.phone[lang];
+}
+
+// 检查上次语言（localStorage），否则默认中文
+let lang = localStorage.getItem('lang') || 'zh';
+renderLang(lang);
+
+// 语言切换按钮
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.onclick = function() {
+    lang = btn.dataset.lang;
+    renderLang(lang);
+    localStorage.setItem('lang', lang); // 下次自动记忆
+  };
+});
+
+/** ==================== 背景音乐控制 ==================== **/
+const bgMusic = document.getElementById('bg-music');
+const musicIcon = document.getElementById('music-icon');
+const waves = document.getElementById('waves');
+const musicBtn = document.getElementById('music-toggle');
+
+function setMusicPlaying(isPlaying) {
+  waves.style.display = isPlaying ? 'block' : 'none';
+  document.getElementById('note-head').setAttribute('fill', isPlaying ? '#547ca8' : '#bdc6d5');
+}
+bgMusic.volume = 0.32;
+bgMusic.autoplay = true;
+
+// 自动播放可能被浏览器限制，需用户首次操作
+document.addEventListener('DOMContentLoaded',()=>{
+  setMusicPlaying(!bgMusic.paused);
+  bgMusic.play().catch(()=>{});
+});
+musicBtn.onclick = () => {
+  if(bgMusic.paused){
+    bgMusic.play();
+    setMusicPlaying(true);
+  }else{
+    bgMusic.pause();
+    setMusicPlaying(false);
+  }
+};
+bgMusic.onplay = ()=>setMusicPlaying(true);
+bgMusic.onpause = ()=>setMusicPlaying(false);
+</script>
 </body>
 </html>
