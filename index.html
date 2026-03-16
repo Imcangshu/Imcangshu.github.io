@@ -16,7 +16,6 @@
   --text-light: #555;
   --shadow: 0 8px 32px rgba(33,44,78,0.09);
 }
-/* 背景填充，随滚动移动 */
 body, html {
   width: 100%;
   min-height: 100vh;
@@ -25,9 +24,9 @@ body, html {
   box-sizing: border-box;
   background-image: url("https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/801ef4138e53d1cab7a88924c3d1d45e.jpg");
   background-repeat: no-repeat;
-  background-size: cover;    /* 填满整个界面 */
+  background-size: cover;    
   background-position: center top;
-  background-attachment: scroll; /* 背景随滚动移动 */
+  background-attachment: scroll;
   transition: background 0.8s;
 }
 body::before {
@@ -38,12 +37,9 @@ body::before {
   z-index: 0;
   pointer-events: none;
 }
-
-/* 导航栏动画效果 */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0; right: 0;
+  top: 0; left: 0; right: 0;
   height: 60px;
   background: var(--card-bg);
   box-shadow: var(--shadow);
@@ -82,12 +78,7 @@ body::before {
   color: var(--secondary);
   background: var(--accent);
 }
-/* 导航栏按钮点击动效 */
-.navbar a:active {
-  background: #bcd4e6;
-}
-
-/* 语言切换动效 */
+.navbar a:active { background: #bcd4e6;}
 .lang-switch {
   margin-left: 24px;
   font-size: 15px;
@@ -108,12 +99,7 @@ body::before {
   color: #fff;
   box-shadow: 0 0 18px #21447833;
 }
-.lang-btn:active {
-  background: #699dfb;
-  color: #fff;
-}
-
-/* 主卡片浮现动画 */
+.lang-btn:active { background: #699dfb; color: #fff; }
 .wrapper {
   position: relative;
   z-index: 2;
@@ -141,6 +127,43 @@ body::before {
   60% { opacity: 0.7; }
   100% { opacity: 1; transform: translateY(0) scale(1);}
 }
+.audio-control {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 20;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px #2854a833;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.audio-control:hover {
+  background: #cce5ff;
+  box-shadow: 0 0 12px #21447844;
+}
+
+.audio-control svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--primary);
+  display: block;
+}
+
+/* 旋转动画(正在播放时) */
+.audio-control.playing {
+  animation: rotate 2.7s linear infinite;
+}
+@keyframes rotate {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
 /* 头像动画边框（渐变流动） */
 .avatar {
   width: 130px;
@@ -151,52 +174,20 @@ body::before {
   margin: 0 auto 28px;
   border: 3px solid #fff;
   box-shadow: 0 6px 20px rgba(33,44,78,0.13);
-  /* 动态渐变边框效果 */
   position: relative;
   z-index: 1;
 }
-.avatar::after {
-  content: '';
-  position: absolute;
-  left: 50%; top: 0;
-  transform: translateX(-50%);
-  width: 130px; height: 130px;
-  border-radius: 50%;
-  pointer-events: none;
-  background: conic-gradient(#214478, #e6eaf0, #547ca8, #214478);
-  opacity: 0.55;
-  z-index: 2;
-  animation: borderSpin 4s linear infinite;
-}
-@keyframes borderSpin {
-  100% {transform: translateX(-50%) rotate(360deg);}
-}
 
-.name {
-  text-align: center;
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 12px;
-  letter-spacing: 2px;
-  animation: textPop 1.2s;
-}
-.title {
-  text-align: center;
-  font-size: 17px;
-  color: var(--text-light);
-  margin-bottom: 42px;
-  font-weight: 500;
-}
+/* 其他原有样式略... */
+
+.name { text-align: center; font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 12px; letter-spacing: 2px; animation: textPop 1.2s; }
+.title { text-align: center; font-size: 17px; color: var(--text-light); margin-bottom: 42px; font-weight: 500; }
 @keyframes textPop {
   0% { opacity: 0; transform: scale(0.8);}
   80% { opacity: 1;}
   100% { transform: scale(1);}
 }
-
-.section {
-  margin-bottom: 36px;
-}
+.section { margin-bottom: 36px;}
 .section-title {
   font-size: 20px;
   font-weight: 600;
@@ -211,24 +202,9 @@ body::before {
   80% { opacity: 1;}
   100% { transform: translateY(0);}
 }
-.info-list {
-  list-style: none;
-  color: var(--text-dark);
-  line-height: 1.8;
-  font-size: 16px;
-  padding-left: 0;
-  margin-left: 0;
-}
-.info-list li {
-  margin-bottom: 8px;
-}
-.bio {
-  color: #444;
-  line-height: 1.9;
-  font-size: 15px;
-  white-space: pre-line;
-  padding-bottom: 10px;
-}
+.info-list { list-style: none; color: var(--text-dark); line-height: 1.8; font-size: 16px; padding-left: 0; margin-left: 0; }
+.info-list li { margin-bottom: 8px; }
+.bio { color: #444; line-height: 1.9; font-size: 15px; white-space: pre-line; padding-bottom: 10px; }
 .contact {
   display: flex;
   flex-wrap: wrap;
@@ -237,62 +213,63 @@ body::before {
   font-size: 16px;
   color: var(--text-dark);
 }
-.contact span {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.works {
-  margin-top: 24px;
-}
-.works-list {
-  list-style: none;
-  color: var(--text-dark);
-  font-size: 15px;
-  padding-left: 0;
-  margin-left: 0;
-}
-.works-list li {
-  margin-bottom: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: worksSlideIn 1s;
-}
+.contact span { display: flex; align-items: center; gap: 7px; }
+.works { margin-top: 24px;}
+.works-list { list-style: none; color: var(--text-dark); font-size: 15px; padding-left: 0; margin-left: 0; }
+.works-list li { margin-bottom: 12px; padding: 12px 0; border-bottom: 1px solid var(--accent); display: flex; align-items: center; gap: 10px; animation: worksSlideIn 1s; }
 @keyframes worksSlideIn {
   0% { opacity: 0; transform: translateX(-20px);}
   80% { opacity: 1;}
   100% { transform: translateX(0);}
 }
-.works-list a {
-  color: var(--primary);
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s, background 0.2s;
-  word-break: break-all;
-  border-radius: 6px;
-  padding: 2px 8px;
-  margin-left: 6px;
-}
-.works-list a:hover {
-  color: var(--secondary);
-  background: var(--accent);
-  text-decoration: underline;
-  animation: pulse 0.2s;
-}
+.works-list a { color: var(--primary); font-weight: 600; text-decoration: none; transition: color 0.2s, background 0.2s; word-break: break-all; border-radius: 6px; padding: 2px 8px; margin-left: 6px; }
+.works-list a:hover { color: var(--secondary); background: var(--accent); text-decoration: underline; animation: pulse 0.2s;}
 @keyframes pulse {
   0% {background: #e6eaf0;}
   100% {background: #547ca822;}
 }
+
 @media (max-width: 900px) {
   .card { padding: 32px 10px; }
   .navbar ul { gap: 16px; }
+  .audio-control { right: 8px; top: 8px; }
 }
+@media (max-width: 650px) {
+  .hobby-mosaic{flex-direction: column !important;}
+  .hobby-mosaic .mosaic-col,.hobby-mosaic .mosaic-row{flex-direction: row !important;}
+}
+.hobby-mosaic {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin: 20px 0 18px 0;
+  justify-content: center; align-items: center;
+}
+.hobby-mosaic .mosaic-col {display: flex; flex-direction: column; gap: 14px;}
+.hobby-mosaic .mosaic-row {display: flex; flex-direction: row; gap: 14px;}
+.hobby-mosaic img {
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 18px rgba(40,70,168,0.08);
+  transition: transform 0.3s;
+}
+.hobby-mosaic-album .img1 { width: 140px; height: 140px;  }
+.hobby-mosaic-album .img2 { width: 100px; height: 100px;  }
+.hobby-mosaic-album .img3 { width: 120px; height: 160px;}
+.hobby-mosaic-album .img4 { width: 90px; height: 120px; }
+.hobby-mosaic-photography .img1 { width: 120px; height: 90px; }
+.hobby-mosaic-photography .img2 { width: 100px; height: 160px; }
+.hobby-mosaic-photography .img3 { width: 120px; height: 120px; }
+.hobby-mosaic-photography .img4 { width: 160px; height: 90px; }
+
+.hobby-mosaic img:hover {transform: scale(1.08) rotate(-2deg);}
+.hobby-intro{margin-bottom:10px;font-size:15px;color:#384c82;}
+.subsection-title{font-size:16px;font-weight:600;color:#384c82;margin:-8px 0 10px 0;}
 </style>
 </head>
 <body>
+<!-- 音乐播放器 音频自动播放&动态图标 -->
+<audio id="bgMusic" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/lv_0_20260316182503.mp3" autoplay loop></audio>
 <div class="navbar">
   <ul>
     <li><a href="#home" class="nav_home active" data-zh="首页" data-en="Home">首页</a></li>
@@ -301,6 +278,7 @@ body::before {
     <li><a href="#courses" class="nav_courses" data-zh="主修课程" data-en="Courses">主修课程</a></li>
     <li><a href="#bio" class="nav_bio" data-zh="个人简介" data-en="About">个人简介</a></li>
     <li><a href="#works" class="nav_works" data-zh="主要著作" data-en="Works">主要著作</a></li>
+    <li><a href="#hobby" class="nav_hobby" data-zh="爱好" data-en="Hobby">爱好</a></li>
   </ul>
   <div class="lang-switch">
     <button class="lang-btn active" id="btn-zh">中文</button>
@@ -309,6 +287,13 @@ body::before {
 </div>
 <div class="wrapper" id="home">
   <div class="card">
+    <!-- 动态音频按钮 -->
+    <div class="audio-control playing" id="audioBtn" title="暂停/播放">
+      <!-- SVG默认:正在播放(音浪/波形图标)-->
+      <svg id="audioIcon" viewBox="0 0 24 24">
+        <rect x="3.5" y="7" width="3" height="10" rx="1.5"/><rect x="9.5" y="4" width="3" height="16" rx="1.5"/><rect x="15.5" y="9" width="3" height="6" rx="1.5"/>
+      </svg>
+    </div>
     <img class="avatar" src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/65cc51c820c9736941901ab175b233d6.jpg" alt="头像">
     <div class="name" id="name">崔凯翔</div>
     <div class="title" id="title">华东政法大学金融学不资深学者</div>
@@ -369,10 +354,75 @@ body::before {
         </li>
       </ul>
     </div>
+
+    <!-- 爱好板块 -->
+    <div class="section" id="hobby">
+      <div class="section-title" id="hobby_title">🎶 爱好与作品</div>
+      <div class="hobby-intro" id="hobby_intro">我的爱好是听音乐和摄影</div>
+      <!-- 专辑拼图 -->
+      <div class="subsection-title" id="album_title">喜欢的专辑</div>
+      <div class="hobby-mosaic hobby-mosaic-album" id="album_mosaic">
+        <div class="mosaic-col">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/96b911f18e2b50cac0f92f9b93340a11.jpg" class="img1" alt="album1">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/fce65036ad3ccafc3efd1edc9ace7a35.jpg" class="img2" alt="album2">
+        </div>
+        <div class="mosaic-col">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/4808e1ade9b6ab05e7ae0bd5ad71c654.jpg" class="img3" alt="album3">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/9d0a5d27a7f47b236621ee543160bda0.jpg" class="img4" alt="album4">
+        </div>
+      </div>
+      <!-- 摄影作品拼图 -->
+      <div class="subsection-title" id="photo_title">摄影作品展示</div>
+      <div class="hobby-mosaic hobby-mosaic-photography" id="photo_mosaic">
+        <div class="mosaic-row">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/f42e456ee2e548b4dc905447c786591c.png" class="img1" alt="photo1">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/d3efe7e2d965af2505e00f1b3ecd7457.jpg" class="img2" alt="photo2">
+        </div>
+        <div class="mosaic-row">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/997a8bd0381790e87b8d1b74282477da.jpg" class="img3" alt="photo3">
+          <img src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/8d05cbf8b4da7f352ea3c5186a59fa63.jpg" class="img4" alt="photo4">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <script>
-// 语言切换
+// 音乐动态图标 && 控制
+const bgMusic = document.getElementById('bgMusic');
+const audioBtn = document.getElementById('audioBtn');
+const audioIcon = document.getElementById('audioIcon');
+let isPlaying = true;
+
+// 音乐图标SVG
+const SVG_PLAY = `<rect x="3.5" y="7" width="3" height="10" rx="1.5"/><rect x="9.5" y="4" width="3" height="16" rx="1.5"/><rect x="15.5" y="9" width="3" height="6" rx="1.5"/>`;
+const SVG_PAUSE = `<polygon points="4,3 20,12 4,21" />`;
+
+function setAudioIcon(status) {
+  if (status) {
+    audioIcon.innerHTML = SVG_PLAY;
+    audioBtn.classList.add('playing');
+  } else {
+    audioIcon.innerHTML = SVG_PAUSE;
+    audioBtn.classList.remove('playing');
+  }
+}
+// 先尝试自动播放一次
+bgMusic.volume = 0.55;
+bgMusic.autoplay = true;
+try { bgMusic.play(); isPlaying=true; setAudioIcon(true);} catch(e) { setAudioIcon(false);}
+audioBtn.onclick = function(){
+  if (bgMusic.paused) {
+    bgMusic.play();
+    isPlaying = true; setAudioIcon(true);
+  } else {
+    bgMusic.pause();
+    isPlaying = false; setAudioIcon(false);
+  }
+};
+bgMusic.onplay = ()=>setAudioIcon(true);
+bgMusic.onpause = ()=>setAudioIcon(false);
+
+// 多语言相关
 const dict = {
   zh: {
     name: "崔凯翔",
@@ -382,7 +432,7 @@ const dict = {
     courses_title: "📚 主修课程",
     bio_title: "🧿 个人简介",
     works_title: "📄 主要著作",
-    nav: ["首页","联系方式","教育经历","主修课程","个人简介","主要著作"],
+    nav: ["首页","联系方式","教育经历","主修课程","个人简介","主要著作","爱好"],
     edu_list: ["2024.09 – 至今 ｜ 华东政法大学"],
     courses_list: ["金融学、宏观经济学、微观经济学、金融市场与金融机构、Python"],
     bio: `已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
@@ -398,14 +448,18 @@ const dict = {
       "卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 实地调研报告——基于对中江挂面村的实地调研",
       "卢奇，李海诺，崔凯翔，王卓群，阮玲欣. 乡村电商法律风险规避指南——基于对中江挂面村的实地调研"
     ],
-     worklink: [
-    "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf",
-    "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf",
-    "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf",
-    "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf"
+    worklink: [
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告1.pdf",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告2.pdf",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告3.pdf",
+      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/报告4.pdf"
     ],
     email: "📩 2837844988@qq.com",
-    phone: "📱 +86 15836137393"
+    phone: "📱 +86 15836137393",
+    hobby_title: "🎶 爱好与作品",
+    hobby_intro: "我的爱好是听音乐和摄影",
+    album_title: "喜欢的专辑",
+    photo_title: "摄影作品展示"
   },
   en: {
     name: "Kaixiang Cui",
@@ -415,7 +469,7 @@ const dict = {
     courses_title: "📚 Courses",
     bio_title: "🧿 About Me",
     works_title: "📄 Major Publications",
-    nav: ["Home","Contact","Education","Courses","About","Works"],
+    nav: ["Home","Contact","Education","Courses","About","Works","Hobby"],
     edu_list: ["2024.09 – Present | East China University of Political Science and Law"],
     courses_list: ["Finance, Macroeconomics, Microeconomics, Financial Markets & Institutions, Python"],
     bio: `Visited 0 countries | Dreamed >100 countries | Hybrid Chinese descent | Chinese boarding student | Offer from Garriton
@@ -432,19 +486,23 @@ Never underestimate the youth, nor the middle-aged, nor the elderly!`,
       "Lu Qi, Li Hainuo, Cui Kaixiang, Wang Zhuoqun, Ruan Lingxin. Rural e-commerce legal risk avoidance guide — Based on field research in Zhongjiang Guamian Village"
     ],
     worklink: [
-      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
-      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E6%A1%88%E4%BE%8B%E6%A3%80%E7%B4%A2%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
-      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94%E6%8A%A5%E5%91%8A%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx",
-      "https://github.com/Imcangshu/Imcangshu.github.io/blob/main/%E5%8D%A2%E5%A5%87%EF%BC%8C%E6%9D%8E%E6%B5%B7%E8%AF%BA%EF%BC%8C%E5%B4%94%E5%87%AF%E7%BF%94%EF%BC%8C%E7%8E%8B%E5%8D%93%E7%BE%A4%EF%BC%8C%E9%98%AE%E7%8E%B2%E6%AC%A3.%E4%B9%A1%E6%9D%91%E7%94%B5%E5%95%86%E6%B3%95%E5%BE%8B%E9%A3%8E%E9%99%A9%E8%A7%84%E9%81%BF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%9F%BA%E4%BA%8E%E5%AF%B9%E4%B8%AD%E6%B1%9F%E6%8C%82%E9%9D%A2%E6%9D%91%E7%9A%84%E5%AE%9E%E5%9C%B0%E8%B0%83%E7%A0%94.docx"
+      "#",
+      "#",
+      "#",
+      "#"
     ],
     email: "📩 2837844988@qq.com",
-    phone: "📱 +86 15836137393"
+    phone: "📱 +86 15836137393",
+    hobby_title: "🎶 Hobby & Works",
+    hobby_intro: "My hobbies are listening to music and photography.",
+    album_title: "Favorite Albums",
+    photo_title: "Photography Showcase"
   }
 };
 function switchLang(lang) {
   document.getElementById("btn-zh").classList.toggle("active", lang==="zh");
   document.getElementById("btn-en").classList.toggle("active", lang==="en");
-  const navClasses = ["nav_home","nav_contact","nav_edu","nav_courses","nav_bio","nav_works"];
+  const navClasses = ["nav_home","nav_contact","nav_edu","nav_courses","nav_bio","nav_works","nav_hobby"];
   navClasses.forEach((cls,i)=>{
       let el = document.querySelector("."+cls);
       el.textContent = dict[lang].nav[i];
@@ -487,10 +545,14 @@ function switchLang(lang) {
       li.appendChild(a);
       worksList.appendChild(li);
   });
+  // hobby
+  document.getElementById("hobby_title").textContent = dict[lang].hobby_title;
+  document.getElementById("hobby_intro").textContent = dict[lang].hobby_intro;
+  document.getElementById("album_title").textContent = dict[lang].album_title;
+  document.getElementById("photo_title").textContent = dict[lang].photo_title;
 }
 // 初始中文
 switchLang("zh");
-// 点击事件
 document.getElementById("btn-zh").onclick=()=>switchLang("zh");
 document.getElementById("btn-en").onclick=()=>switchLang("en");
 </script>
