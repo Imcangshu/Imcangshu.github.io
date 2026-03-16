@@ -21,7 +21,7 @@
       background: #f2f3f5;
       overflow-x: hidden;
     }
-    /* 门楣背景，固定高度，显示图片纵向中间一段 */
+    /* 门楣背景，固定高度，显示图片纵向中间三段 */
     .header-banner {
       width: 100vw;
       max-width: 100%;
@@ -36,13 +36,14 @@
       width: 100vw;
       min-width: 100vw;
       max-width: none;
-      height: 960px; /* 高于容器高度，确保可通过object-position定位中间区域 */
-      min-height: 400px;
+      /* 让图片自身高度为banner区高度的5/3，使20%处正好顶到banner顶，80%到底 */
+      height: 533px; /* 320*5/3=533 H = bannerH*5/3 */
+      /* 适配不同屏宽的比例关系 */
       object-fit: cover;
-      object-position: center 66.6%;
-      /* object-position: center center 67%; //更细致可调 */
+      object-position: center 50%;
+      /* 向上偏移1/5图片高，使起始恰好为banner顶 */
       position: absolute;
-      top: -320px; /* 显示中间三分之一，需要实际根据图片比例微调 */
+      top: -107px; /* 533*0.2=约107 */
       left: 0;
       z-index: 2;
       pointer-events: none;
@@ -50,11 +51,17 @@
     }
     @media (max-width: 1200px) {
       .header-banner, .header-banner-img { height: 200px; }
-      .header-banner-img { top: -200px; height: 600px; }
+      .header-banner-img {
+        height: 333px;    /* 200*5/3≈333 */
+        top: -67px;       /* 333*0.2=约67 */
+      }
     }
     @media (max-width: 800px) {
       .header-banner, .header-banner-img { height: 120px; }
-      .header-banner-img { top: -120px; height: 360px; }
+      .header-banner-img {
+        height: 200px;    /* 120*5/3=200 */
+        top: -40px;       /* 200*0.2=40 */
+      }
     }
 
     /* 主卡片内容：浮起、撑满 */
@@ -71,7 +78,6 @@
     }
     .main-card {
       margin: -80px auto 48px auto;
-      /* 让内容上移以“盖住”门楣 */
       width: 100vw;
       max-width: 100vw;
       background: var(--card-bg);
@@ -145,7 +151,6 @@
       align-items: center;
       margin-bottom: 8px;
       transition: box-shadow .19s;
-      /* 使内容专业感，“卡片化” */
     }
     .hobby-block:hover { box-shadow: 0 8px 32px #28436b30;}
     .hobby-title {
@@ -155,7 +160,6 @@
       margin-bottom: 18px;
       letter-spacing: 1px;
     }
-    /* 专辑大图样式 */
     .music-album-art {
       width: 95%;
       max-width: 540px;
@@ -174,7 +178,6 @@
       display: block;
       border-radius: 12px;
       object-fit: contain;
-      /* 保证原比例不变、无裁剪 */
     }
     .music-name {
       font-size: 16.5px;
@@ -187,7 +190,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    /* 摄影作品大图样式 */
     .photo-block-art {
       width: 95%;
       max-width: 540px;
@@ -206,7 +208,6 @@
       display: block;
       border-radius: 12px;
       object-fit: contain;
-      /* 保证原比例不变、无裁剪 */
     }
     .photo-caption {
       font-size: 16.5px;
@@ -237,7 +238,7 @@
   <!-- 门楣背景区 -->
   <div class="header-banner">
     <img class="header-banner-img"
-      src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/792269fc5ed85bb1a14b6b32ba90c515.jpg"
+      src="https://raw.githubusercontent.com/Imcangshu/Imcangshu.github.io/main/801ef4138e53d1cab7a88924c3d1d45e.jpg"
       alt="门楣背景"
     />
   </div>
@@ -274,7 +275,7 @@
         <div class="section-title">🧿 个人简介</div>
         <div class="bio">
 已飞0国|已梦游国家100+｜华华裔混血｜中国留宿生|加里敦offer
-华籍华人|PDD资深买手|蜜���冰城品鉴师10年国奖|
+华籍华人|PDD资深买手|蜜雪冰城品鉴师10年国奖|
 国家级身份证持有者｜6台驾驶证待考中|
 清华北大没考雅思托福没考|诺贝尔奖觊觎者|
 四恩格尔系数|Internet冲浪达人|
