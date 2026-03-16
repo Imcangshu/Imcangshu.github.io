@@ -440,6 +440,25 @@ musicBtn.onclick = () => {
 };
 bgMusic.onplay = ()=>setMusicPlaying(true);
 bgMusic.onpause = ()=>setMusicPlaying(false);
+<script>
+/* ...原有JS代码... */
+bgMusic.onplay = ()=>setMusicPlaying(true);
+bgMusic.onpause = ()=>setMusicPlaying(false);
+
+// ====== 自动播放 hack：首次用户操作自动播放 ======
+function resumeBgMusicOnFirstUserAction() {
+  function tryPlayMusic() {
+    bgMusic.play().catch(()=>{});
+    document.removeEventListener('mousedown', tryPlayMusic);
+    document.removeEventListener('touchstart', tryPlayMusic);
+    document.removeEventListener('keydown', tryPlayMusic);
+  }
+  document.addEventListener('mousedown', tryPlayMusic);
+  document.addEventListener('touchstart', tryPlayMusic);
+  document.addEventListener('keydown', tryPlayMusic);
+}
+resumeBgMusicOnFirstUserAction();
+
 </script>
 </body>
 </html>
